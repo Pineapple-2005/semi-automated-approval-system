@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE LTO Driver's License.",
+    "document_type": "drivers_license",
+    "system": "BayaniHub (system2) — direct submission"
+  },
+  "extracted_data": {
+    "license_number":   "D01-23-456789",
+    "name":             "SANTOS, MARIA GRACE B.",
+    "date_of_birth":    "03/22/1988",
+    "expiry_date":      "03/22/2026",
+    "restriction_codes":["1","2"],
+    "raw_address":      "456 Mabini Ave, Brgy. 7, Pasig City"
+  },
+  "confidence_scores": {
+    "license_number":    0.93,
+    "name":              0.89,
+    "date_of_birth":     0.91,
+    "expiry_date":       0.90,
+    "restriction_codes": 0.88,
+    "raw_address":       0.72
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "restriction_code_meaning": {
+    "1": "Motorcycle",
+    "2": "Light vehicle (non-professional)"
+  },
+  "visual_reference": {
+    "front_layout": [
+      "┌────────────────────────────────────────────────────┐",
+      "│ REPUBLIC OF THE PHILIPPINES                        │",
+      "│ LAND TRANSPORTATION OFFICE         [LTO Logo]      │",
+      "│                                                     │",
+      "│ [PHOTO]  License No.: D01-23-456789                │",
+      "│          Name: SANTOS, MARIA GRACE B.              │",
+      "│          Address: 456 Mabini Ave, Pasig City       │",
+      "│          Date of Birth: 03/22/1988                 │",
+      "│          Expiry: 03/22/2026                        │",
+      "│          Restrictions: 1, 2                        │",
+      "│                                   [Hologram]       │",
+      "└────────────────────────────────────────────────────┘"
+    ],
+    "card_colour": "LTO blue background with yellow license number strip"
+  }
+}

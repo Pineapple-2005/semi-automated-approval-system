@@ -1,0 +1,44 @@
+{
+  "document_type": "philsys",
+  "display_name": "PhilSys National ID (ePhilID)",
+  "issuer": "Philippine Statistics Authority (PSA)",
+  "standard_dimensions_mm": { "width": 85.6, "height": 54.0 },
+  "aspect_ratio": 1.5852,
+  "required_fields": ["pcn", "name", "date_of_birth"],
+  "optional_fields": ["sex", "blood_type", "address", "middle_name"],
+  "regex_patterns": {
+    "pcn": "\\b(\\d{4}[\\- ]\\d{4}[\\- ]\\d{4}[\\- ]\\d)\\b",
+    "last_name": "(?:Last Name|Surname|APELYIDO)[:\\s]+([A-Z][A-Z\\s\\-]+)",
+    "first_name": "(?:First Name|Given Name|PANGALAN)[:\\s]+([A-Z][A-Za-z\\s\\-]+)",
+    "middle_name": "(?:Middle Name|GITNANG PANGALAN)[:\\s]+([A-Z][A-Za-z\\s\\-]+)",
+    "name": "([A-Z][A-Z\\s,\\.\\-]+(?:,\\s*[A-Z][A-Z\\s\\.\\-]+){1,2})",
+    "date_of_birth": "(?:Date of Birth|Petsa ng Kapanganakan|DOB)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "sex": "(?:Sex|Kasarian)[:\\s]+(MALE|FEMALE|Male|Female)",
+    "blood_type": "(?:Blood Type|Grupo ng Dugo)[:\\s]+([ABO]{1,2}[+-]?)",
+    "address": "(?:Address|Tirahan)[:\\s]+(.+?)(?=\\n(?:[A-Z]|$)|$)"
+  },
+  "ocr_regions": [
+    { "name": "photo",       "x_ratio": 0.04, "y_ratio": 0.10, "w_ratio": 0.26, "h_ratio": 0.70 },
+    { "name": "pcn_area",    "x_ratio": 0.32, "y_ratio": 0.07, "w_ratio": 0.65, "h_ratio": 0.18 },
+    { "name": "name_area",   "x_ratio": 0.32, "y_ratio": 0.27, "w_ratio": 0.65, "h_ratio": 0.22 },
+    { "name": "dob_area",    "x_ratio": 0.32, "y_ratio": 0.51, "w_ratio": 0.42, "h_ratio": 0.14 },
+    { "name": "sex_area",    "x_ratio": 0.74, "y_ratio": 0.51, "w_ratio": 0.22, "h_ratio": 0.14 },
+    { "name": "address_area","x_ratio": 0.32, "y_ratio": 0.67, "w_ratio": 0.65, "h_ratio": 0.22 }
+  ],
+  "color_hints": {
+    "dominant_colors": ["gold", "deep_blue", "white", "red", "yellow"],
+    "background": "gold_with_philippine_flag_motif",
+    "text_color": "dark_blue_or_white"
+  },
+  "security_features": [
+    "RFID chip embedded",
+    "Laser-engraved data",
+    "Holographic overlay",
+    "QR code with encrypted data",
+    "UV-reactive patterns",
+    "Intaglio printing",
+    "Microprinting",
+    "Philippine coat of arms watermark"
+  ],
+  "notes": "PCN (Philippine Identification Number) format: XXXX-XXXX-XXXX-X (4-4-4-1 groups). The ePhilID (card form) was rolled out from 2021. Front has photo, PCN, name, DOB, sex, blood type, address. The card displays the Philippine flag and Coat of Arms. QR code on back contains biometric data. Physical card is gold/yellow with blue PSA branding."
+}

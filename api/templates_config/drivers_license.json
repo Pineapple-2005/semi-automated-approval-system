@@ -1,0 +1,52 @@
+{
+  "document_type": "drivers_license",
+  "display_name": "LTO Driver's License",
+  "issuer": "Land Transportation Office (LTO)",
+  "standard_dimensions_mm": { "width": 85.6, "height": 54.0 },
+  "aspect_ratio": 1.5852,
+  "required_fields": ["license_number", "name", "date_of_birth", "expiry_date"],
+  "optional_fields": ["address", "restrictions", "conditions", "blood_type", "agency_code"],
+  "regex_patterns": {
+    "license_number": "\\b([A-Z]\\d{2}-\\d{2}-\\d{6}|\\d{2}-\\d{2}-\\d{6})\\b",
+    "name": "(?:Name|PANGALAN)[:\\s]+([A-Z][A-Za-z,\\.\\s\\-]+)",
+    "date_of_birth": "(?:Date of Birth|DOB|BIRTHDAY)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\d{2}\\s+[A-Z]{3}\\s+\\d{4})",
+    "expiry_date": "(?:Expiry|Expiration|EXP)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\d{2}\\s+[A-Z]{3}\\s+\\d{4})",
+    "restrictions": "(?:Restrictions?|Rest\\.?)[:\\s]+([0-9,\\s]+)",
+    "conditions": "(?:Conditions?|Cond\\.?)[:\\s]+([A-Z0-9,\\s]+)",
+    "blood_type": "(?:Blood Type|BT)[:\\s]+([ABO]{1,2}[+-]?)",
+    "address": "(?:Address|Add\\.?)[:\\s]+(.+?)(?=\\n|$)"
+  },
+  "restriction_codes": {
+    "1": "Motorcycle",
+    "2": "Light vehicle (non-professional)",
+    "3": "Light vehicle (professional)",
+    "4": "Medium/Heavy truck",
+    "5": "Bus / Public utility vehicle",
+    "6": "Articulated vehicle",
+    "7": "Motorcycle with sidecar",
+    "8": "Three-wheeled motorcycle (tricycle)"
+  },
+  "ocr_regions": [
+    { "name": "photo",           "x_ratio": 0.03, "y_ratio": 0.08, "w_ratio": 0.23, "h_ratio": 0.75 },
+    { "name": "license_no_area", "x_ratio": 0.28, "y_ratio": 0.05, "w_ratio": 0.70, "h_ratio": 0.15 },
+    { "name": "name_area",       "x_ratio": 0.28, "y_ratio": 0.22, "w_ratio": 0.70, "h_ratio": 0.15 },
+    { "name": "address_area",    "x_ratio": 0.28, "y_ratio": 0.40, "w_ratio": 0.70, "h_ratio": 0.20 },
+    { "name": "dob_area",        "x_ratio": 0.28, "y_ratio": 0.62, "w_ratio": 0.40, "h_ratio": 0.13 },
+    { "name": "expiry_area",     "x_ratio": 0.68, "y_ratio": 0.62, "w_ratio": 0.30, "h_ratio": 0.13 },
+    { "name": "restrictions",    "x_ratio": 0.28, "y_ratio": 0.77, "w_ratio": 0.70, "h_ratio": 0.15 }
+  ],
+  "color_hints": {
+    "dominant_colors": ["lto_blue", "yellow", "white", "dark_blue"],
+    "background": "blue_with_yellow_stripe",
+    "text_color": "black"
+  },
+  "security_features": [
+    "Holographic laminate",
+    "Laser-engraved license number",
+    "UV-reactive security features",
+    "Microprinting on card border",
+    "2D barcode on back",
+    "Digital photo"
+  ],
+  "notes": "License number format: XX-XX-XXXXXX (can have letter prefix). Expiry date is typically 3 or 5 years from issue. Restriction codes are numeric (1-8), comma-separated. Conditions include: B (corrective lenses), A (with helper), etc. Card has LTO seal and Philippine flag. Non-professional license (NPL) vs Professional (PL) designation."
+}

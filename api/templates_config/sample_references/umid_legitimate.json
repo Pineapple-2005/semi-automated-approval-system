@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE, unaltered UMID card.",
+    "used_for": "Reference baseline for admin reviewers and OCR confidence tuning.",
+    "document_type": "umid",
+    "system": "HopeCard (system1) — government_id umbrella"
+  },
+  "extracted_data": {
+    "crn":          "01-234567890-1",
+    "name":         "DELA CRUZ, JUAN PABLO M.",
+    "date_of_birth":"01/15/1990",
+    "raw_address":  "123 Rizal Street, Barangay Poblacion, Quezon City, Metro Manila"
+  },
+  "confidence_scores": {
+    "crn":          0.92,
+    "name":         0.88,
+    "date_of_birth":0.91,
+    "raw_address":  0.75
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "front_layout": [
+      "┌─────────────────────────────────────────────────┐",
+      "│  [PHOTO]  REPUBLIC OF THE PHILIPPINES           │",
+      "│           UNIFIED MULTI-PURPOSE ID              │",
+      "│           CRN: 01-234567890-1                   │",
+      "│           DELA CRUZ, JUAN PABLO M.              │",
+      "│           Date of Birth: 01/15/1990             │",
+      "│           Address: 123 Rizal St, QC             │",
+      "└─────────────────────────────────────────────────┘"
+    ],
+    "card_colour": "Teal/dark-green gradient with gold Philippine eagle"
+  }
+}

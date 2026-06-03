@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE SEC Certificate of Registration (Foundation).",
+    "document_type": "sec_registration",
+    "system": "HopeCard (system1) — direct submission"
+  },
+  "extracted_data": {
+    "company_name":           "PAG-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT, INC.",
+    "sec_registration_number":"CS201900123456",
+    "date_of_incorporation":  "02/20/2019",
+    "type_of_corporation":    "FOUNDATION",
+    "registered_address":     "Unit 301, Kalayaan Building, España Blvd., Sampaloc, Manila 1008",
+    "authorized_capital_stock":"1,000,000.00"
+  },
+  "confidence_scores": {
+    "company_name":            0.91,
+    "sec_registration_number": 0.95,
+    "date_of_incorporation":   0.90,
+    "type_of_corporation":     0.88,
+    "registered_address":      0.78,
+    "authorized_capital_stock":0.85
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "document_layout": [
+      "┌──────────────────────────────────────────────────────────────────┐",
+      "│      REPUBLIC OF THE PHILIPPINES                                 │",
+      "│  SECURITIES AND EXCHANGE COMMISSION  [SEC Seal]                 │",
+      "│                                                                   │",
+      "│         CERTIFICATE OF REGISTRATION                              │",
+      "│                                                                   │",
+      "│ This is to certify that                                          │",
+      "│                                                                   │",
+      "│   PAG-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT, INC.            │",
+      "│                                                                   │",
+      "│ a non-stock, non-profit corporation/foundation, has been         │",
+      "│ duly registered with the Commission on February 20, 2019         │",
+      "│ under SEC Registration No. CS201900123456                        │",
+      "│                                                                   │",
+      "│ Principal Office: Unit 301, Kalayaan Bldg, España Blvd, Manila  │",
+      "│ Authorized Capital Stock: PHP 1,000,000.00                      │",
+      "│                                                                   │",
+      "│ IN WITNESS WHEREOF...                                            │",
+      "│                                    [SEC QR Code]                │",
+      "│ _______________________                                          │",
+      "│ SEC Commissioner                                                 │",
+      "└──────────────────────────────────────────────────────────────────┘"
+    ],
+    "paper_size": "A4 portrait, white with SEC maroon letterhead and gold embossed seal"
+  },
+  "sec_number_breakdown": {
+    "CS":   "Domestic corporation prefix",
+    "2019": "Year of registration",
+    "00123456": "Sequential registration number"
+  }
+}

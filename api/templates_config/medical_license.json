@@ -1,0 +1,59 @@
+{
+  "document_type": "medical_license",
+  "display_name": "PRC Medical Professional License",
+  "issuer": "Professional Regulation Commission (PRC)",
+  "accepted_by_systems": ["system2 (BayaniHub)"],
+  "standard_dimensions_mm": { "width": 85.6, "height": 54.0 },
+  "aspect_ratio": 1.5852,
+  "required_fields": ["prc_number", "profession", "name", "date_of_birth", "expiry_date"],
+  "optional_fields": ["registration_date", "license_number", "medical_profession"],
+  "accepted_medical_professions": [
+    "PHYSICIAN", "MEDICAL DOCTOR", "DOCTOR OF MEDICINE",
+    "REGISTERED NURSE", "NURSE",
+    "DENTIST", "DENTAL SURGEON",
+    "PHARMACIST",
+    "PHYSICAL THERAPIST",
+    "OCCUPATIONAL THERAPIST",
+    "MEDICAL TECHNOLOGIST",
+    "RADIOLOGIC TECHNOLOGIST",
+    "MIDWIFE", "REGISTERED MIDWIFE",
+    "OPTOMETRIST",
+    "NUTRITIONIST-DIETITIAN",
+    "RESPIRATORY THERAPIST",
+    "PSYCHOLOGIST",
+    "VETERINARIAN",
+    "SANITARY ENGINEER"
+  ],
+  "regex_patterns": {
+    "prc_number":        "(?:PRC No\\.?|Registration No\\.?)[:\\s]*(\\d{7})",
+    "profession":        "([A-Z][A-Z\\s]+(?:NURSE|PHYSICIAN|DOCTOR|DENTIST|PHARMACIST|THERAPIST|TECHNOLOGIST|MIDWIFE|OPTOMETRIST|DIETITIAN|PSYCHOLOGIST|VETERINARIAN|ENGINEER)(?:\\s+[A-Z]+)*)",
+    "name":              "Name[:\\s]+([A-Z][A-Za-z,\\.\\s\\-]+)",
+    "date_of_birth":     "(?:Date of Birth|DOB)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "registration_date": "(?:Date of Registration|Reg\\.? Date)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "expiry_date":       "(?:Expiry|Expiration|Valid Until)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})"
+  },
+  "ocr_regions": [
+    { "name": "photo",            "x_ratio": 0.04, "y_ratio": 0.10, "w_ratio": 0.24, "h_ratio": 0.72 },
+    { "name": "prc_number_area",  "x_ratio": 0.30, "y_ratio": 0.05, "w_ratio": 0.68, "h_ratio": 0.16 },
+    { "name": "profession_area",  "x_ratio": 0.30, "y_ratio": 0.22, "w_ratio": 0.68, "h_ratio": 0.14 },
+    { "name": "name_area",        "x_ratio": 0.30, "y_ratio": 0.38, "w_ratio": 0.68, "h_ratio": 0.16 },
+    { "name": "dob_area",         "x_ratio": 0.30, "y_ratio": 0.56, "w_ratio": 0.40, "h_ratio": 0.13 },
+    { "name": "expiry_area",      "x_ratio": 0.72, "y_ratio": 0.56, "w_ratio": 0.26, "h_ratio": 0.13 }
+  ],
+  "color_hints": {
+    "dominant_colors": ["prc_blue", "gold", "white"],
+    "background": "blue_with_gold_accents",
+    "text_color": "white_or_dark_blue"
+  },
+  "security_features": [
+    "Holographic PRC seal",
+    "Laser-engraved PRC number and name",
+    "UV-reactive ink",
+    "2D barcode on reverse"
+  ],
+  "semantic_validation": {
+    "profession_must_be_medical": true,
+    "flag_if_non_medical": "medical_profession_not_licensed"
+  },
+  "notes": "This type is structurally identical to prc but adds a profession whitelist check. Only PRC IDs whose profession field matches an accepted medical profession pass without the medical_profession_not_licensed flag. BayaniHub requires this to vet volunteer medical staff."
+}

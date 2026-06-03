@@ -1,0 +1,10 @@
+{
+  "document_type": "government_id",
+  "display_name": "Philippine Government-Issued ID (Umbrella)",
+  "description": "Accepts any valid Philippine government-issued photo ID. The verification pipeline resolves this umbrella type to the specific subtype detected by the template classifier.",
+  "accepted_subtypes": ["umid", "passport", "philsys", "drivers_license", "prc"],
+  "accepted_by_systems": ["system1 (HopeCard)", "system3 (Damayan)"],
+  "required_fields": ["name", "date_of_birth"],
+  "optional_fields": ["id_number", "expiry_date", "address"],
+  "notes": "When document_type=government_id is submitted, the ORB template matcher attempts to classify the specific ID type. The resolved type is stored in document_type_detected. OCR field extraction then uses the resolved type. A mismatch flag is only raised if the detected type is NOT in accepted_subtypes."
+}

@@ -1,0 +1,36 @@
+{
+  "document_type": "organizational_certificate",
+  "display_name": "Philippine Organisational Registration Certificate",
+  "accepted_by_systems": ["system1 (HopeCard)"],
+  "supported_certificate_types": {
+    "DTI":   "Department of Trade and Industry — Business Name Registration",
+    "CDA":   "Cooperative Development Authority — Certificate of Registration",
+    "DSWD":  "Department of Social Welfare and Development — NGO Accreditation",
+    "OTHER": "Other government-issued organisational certificate"
+  },
+  "required_fields": ["organization_name", "registration_number", "date_of_registration"],
+  "optional_fields": ["certificate_type", "validity_date", "authorized_representative", "registered_address"],
+  "regex_patterns": {
+    "dti_registration_number": "BN-\\d{9}-\\d{2}",
+    "organization_name":       "(?:Business Name|Name of (?:Organization|NGO|Cooperative))[:\\s]+([A-Za-z0-9\\s,\\.\\&\\-']+)",
+    "date_of_registration":    "(?:Date of Registration|Issue Date)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\w+ \\d{1,2},?\\s*\\d{4})",
+    "validity_date":           "(?:Valid(?:ity)?|Expiry|Renewed Until)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\w+ \\d{1,2},?\\s*\\d{4})",
+    "authorized_representative": "(?:Authorized Representative|Owner|President)[:\\s]+([A-Z][A-Za-z\\s,\\.]+)"
+  },
+  "semantic_validation": {
+    "dti_number_format": "BN-XXXXXXXXX-XX",
+    "flag_if_invalid_dti_format": "invalid_dti_registration_format"
+  },
+  "color_hints": {
+    "dominant_colors": ["white", "black", "government_blue"],
+    "background": "white_official_document",
+    "text_color": "black"
+  },
+  "security_features": [
+    "Official dry seal or wet seal",
+    "Authorised signatory signature",
+    "Government agency letterhead",
+    "QR code (newer DTI certs)"
+  ],
+  "notes": "DTI certificates are typically landscape A4 or half-A4 paper. CDA and DSWD certificates may be portrait A4. The expected_name field should contain the registered organisation/business name for comparison. The expected_dob field is not applicable for this document type and will be skipped in flagging."
+}

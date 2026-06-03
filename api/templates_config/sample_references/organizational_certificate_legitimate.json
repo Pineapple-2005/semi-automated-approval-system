@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE DTI Business Name Registration Certificate.",
+    "document_type": "organizational_certificate",
+    "system": "HopeCard (system1) — direct submission"
+  },
+  "extracted_data": {
+    "certificate_type":         "DTI",
+    "organization_name":        "PAG-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT",
+    "registration_number":      "BN-123456789-01",
+    "date_of_registration":     "03/15/2019",
+    "validity_date":            "03/15/2024",
+    "authorized_representative":"DELA CRUZ, JUAN PABLO M.",
+    "registered_address":       "Unit 301, Kalayaan Bldg., España Blvd., Sampaloc, Manila"
+  },
+  "confidence_scores": {
+    "certificate_type":          0.95,
+    "organization_name":         0.87,
+    "registration_number":       0.93,
+    "date_of_registration":      0.90,
+    "validity_date":             0.88,
+    "authorized_representative": 0.82,
+    "registered_address":        0.76
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "document_layout": [
+      "┌──────────────────────────────────────────────────────────────┐",
+      "│         REPUBLIC OF THE PHILIPPINES                          │",
+      "│    DEPARTMENT OF TRADE AND INDUSTRY                         │",
+      "│         [DTI Seal]    BUSINESS NAME REGISTRATION            │",
+      "│                                                               │",
+      "│ Business Name: PAGA-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT │",
+      "│ Registration No.: BN-123456789-01                           │",
+      "│ Date of Registration: March 15, 2019                        │",
+      "│ Valid Until: March 15, 2024                                  │",
+      "│ Address: Unit 301, Kalayaan Bldg, España Blvd, Manila        │",
+      "│ Owner/Representative: DELA CRUZ, JUAN PABLO M.              │",
+      "│                                                               │",
+      "│ _______________________                                       │",
+      "│ Authorized DTI Official    [DTI QR Code]                    │",
+      "└──────────────────────────────────────────────────────────────┘"
+    ],
+    "paper_size": "A4 portrait, white with DTI letterhead"
+  },
+  "note_on_expected_name": "The expected_name field submitted by HopeCard should match the organization_name on this certificate. The name comparison uses fuzzy matching at 80% similarity threshold."
+}

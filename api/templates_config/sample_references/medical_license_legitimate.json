@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE PRC Medical License (Registered Nurse).",
+    "document_type": "medical_license",
+    "system": "BayaniHub (system2) — direct submission"
+  },
+  "extracted_data": {
+    "prc_number":        "0123456",
+    "profession":        "REGISTERED NURSE",
+    "medical_profession":"REGISTERED NURSE",
+    "name":              "GARCIA, JOSE MIGUEL R.",
+    "date_of_birth":     "09/18/1992",
+    "registration_date": "07/01/2016",
+    "expiry_date":       "06/30/2027"
+  },
+  "confidence_scores": {
+    "prc_number":        0.94,
+    "profession":        0.90,
+    "name":              0.88,
+    "date_of_birth":     0.91,
+    "registration_date": 0.85,
+    "expiry_date":       0.89
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "front_layout": [
+      "┌────────────────────────────────────────────────────┐",
+      "│ REPUBLIC OF THE PHILIPPINES        [PRC Seal]      │",
+      "│ PROFESSIONAL REGULATION COMMISSION                 │",
+      "│                                                     │",
+      "│ PRC No.: 0123456                                   │",
+      "│                                                     │",
+      "│         REGISTERED NURSE                           │",
+      "│ [PHOTO]                                            │",
+      "│         GARCIA, JOSE MIGUEL R.                     │",
+      "│         Date of Birth: 09/18/1992                 │",
+      "│         Reg. Date: 07/01/2016                     │",
+      "│         Expiry: 06/30/2027        [Hologram]      │",
+      "└────────────────────────────────────────────────────┘"
+    ],
+    "card_colour": "PRC blue with gold seal; profession printed in large ALL-CAPS"
+  },
+  "flag_that_would_be_raised_for_non_medical": {
+    "flag": "medical_profession_not_licensed:detected_profession=CIVIL ENGINEER:expected=PRC_medical_profession",
+    "explanation": "If the profession field were CIVIL ENGINEER instead of REGISTERED NURSE, BayaniHub would receive this flag and the job would go to needs_review."
+  }
+}

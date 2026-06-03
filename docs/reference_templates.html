@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philippine ID Verification — Reference Templates</title>
+<style>
+  :root {
+    --blue: #1a3a6b; --gold: #c9a227; --red: #ce1126;
+    --green: #007a3d; --teal: #007b8a; --lto-blue: #1565c0;
+    --prc-blue: #0d47a1; --sec-maroon: #7b1c2e; --psa-gold: #c49a00;
+    --bg: #f4f6fa; --card-bg: #fff; --border: #dee2e6;
+    --flag-red: #dc3545; --flag-amber: #fd7e14; --flag-green: #28a745;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: #222; line-height: 1.5; }
+  header { background: var(--blue); color: #fff; padding: 24px 32px; }
+  header h1 { font-size: 1.6rem; }
+  header p  { opacity: .8; margin-top: 4px; font-size: .95rem; }
+  nav { background: #fff; border-bottom: 2px solid var(--gold); padding: 10px 32px; display: flex; gap: 16px; flex-wrap: wrap; }
+  nav a { text-decoration: none; color: var(--blue); font-size: .875rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; }
+  nav a:hover { background: var(--blue); color: #fff; }
+  main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  section { margin-bottom: 56px; }
+  h2 { font-size: 1.3rem; color: var(--blue); border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 20px; }
+  h3 { font-size: 1rem; color: var(--blue); margin-bottom: 12px; }
+  .system-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .75rem; font-weight: 700; margin-left: 10px; vertical-align: middle; }
+  .hopecard   { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .bayanicard { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .damayan    { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .doc-card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .doc-card-header { padding: 14px 18px; font-weight: 700; font-size: .95rem; color: #fff; }
+  .doc-card-body { padding: 18px; }
+  .id-mockup { font-family: 'Courier New', monospace; font-size: .72rem; background: #1e1e1e; color: #d4d4d4; padding: 14px 16px; border-radius: 6px; overflow-x: auto; white-space: pre; margin-bottom: 14px; line-height: 1.6; }
+  .fields-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-bottom: 14px; }
+  .fields-table th { background: #f0f4ff; color: var(--blue); text-align: left; padding: 6px 10px; border: 1px solid var(--border); }
+  .fields-table td { padding: 5px 10px; border: 1px solid var(--border); vertical-align: top; }
+  .fields-table tr:nth-child(even) td { background: #fafbff; }
+  .required-dot { color: var(--flag-red); font-weight: 900; }
+  .flag-box { background: #fff8e1; border-left: 4px solid var(--flag-amber); padding: 10px 14px; border-radius: 4px; font-size: .82rem; margin-bottom: 8px; }
+  .flag-box code { background: #fee; border: 1px solid #fcc; padding: 1px 5px; border-radius: 3px; font-size: .8rem; color: #c00; word-break: break-all; display: block; margin-top: 4px; }
+  .ok-box { background: #e8f5e9; border-left: 4px solid var(--flag-green); padding: 10px 14px; border-radius: 4px; font-size: .82rem; margin-bottom: 8px; }
+  .info-box { background: #e3f2fd; border-left: 4px solid var(--lto-blue); padding: 10px 14px; border-radius: 4px; font-size: .82rem; margin-bottom: 8px; }
+  .status-chip { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .75rem; font-weight: 700; }
+  .auto-approved { background: #e8f5e9; color: #2e7d32; border: 1px solid #81c784; }
+  .needs-review  { background: #fff3e0; color: #e65100; border: 1px solid #ffb74d; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; margin-bottom: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  footer { background: var(--blue); color: rgba(255,255,255,.7); text-align: center; padding: 18px; font-size: .8rem; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Philippine ID Document Verification — Reference Templates</h1>
+  <p>Visual layout, field specifications, and flag examples for all supported document types.</p>
+</header>
+
+<nav>
+  <a href="#systems">System Requirements</a>
+  <a href="#gov-ids">Government IDs</a>
+  <a href="#medical">Medical License</a>
+  <a href="#org-cert">Org Certificate</a>
+  <a href="#sec-reg">SEC Registration</a>
+  <a href="#flags">Flag Reference</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="systems">
+  <h2>System Document Requirements</h2>
+  <div class="grid">
+
+    <div class="doc-card">
+      <div class="doc-card-header" style="background:#2e7d32">
+        HopeCard <small style="font-weight:400">(system1) — Charity Donation Platform</small>
+      </div>
+      <div class="doc-card-body">
+        <table class="fields-table">
+          <thead><tr><th>Accepted Document Type</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><strong>government_id</strong> <span class="required-dot">●</span></td><td>Donor identity (any PH gov't ID)</td></tr>
+            <tr><td><strong>organizational_certificate</strong></td><td>Org legitimacy (DTI / CDA / DSWD)</td></tr>
+            <tr><td><strong>sec_registration</strong></td><td>Corporation / foundation proof</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">The <code>government_id</code> umbrella accepts: UMID, Passport, PhilSys, Driver's License, PRC ID.</div>
+      </div>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-card-header" style="background:#1565c0">
+        BayaniHub <small style="font-weight:400">(system2) — Volunteering Management</small>
+      </div>
+      <div class="doc-card-body">
+        <table class="fields-table">
+          <thead><tr><th>Accepted Document Type</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><strong>drivers_license</strong> <span class="required-dot">●</span></td><td>Transport volunteer eligibility</td></tr>
+            <tr><td><strong>medical_license</strong> <span class="required-dot">●</span></td><td>Medical volunteer credentials</td></tr>
+          </tbody>
+        </table>
+        <div class="flag-box">A <strong>medical_license</strong> whose profession is NOT in the approved medical list will be flagged:<code>medical_profession_not_licensed:detected_profession=CIVIL ENGINEER</code></div>
+      </div>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-card-header" style="background:#880e4f">
+        Damayan <small style="font-weight:400">(system3) — DRRM Emergency Response</small>
+      </div>
+      <div class="doc-card-body">
+        <table class="fields-table">
+          <thead><tr><th>Accepted Document Type</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><strong>government_id</strong> <span class="required-dot">●</span></td><td>Beneficiary / responder identity</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">Fast-track identity verification for disaster relief operations. Accepts any valid PH government-issued photo ID.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="gov-ids">
+  <h2>Government-Issued IDs <span class="system-badge hopecard">HopeCard</span> <span class="system-badge damayan">Damayan</span></h2>
+  <div class="legend">
+    <span class="legend-item"><span class="dot" style="background:#dc3545"></span> Required field</span>
+    <span class="legend-item"><span class="dot" style="background:#adb5bd"></span> Optional field</span>
+  </div>
+
+  <!-- UMID -->
+  <div class="doc-card" style="margin-bottom:20px">
+    <div class="doc-card-header" style="background:var(--teal)">UMID — Unified Multi-Purpose ID (SSS / GSIS)</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Card Layout</h3>
+          <div class="id-mockup">┌─────────────────────────────────────────────┐
+│  [PHOTO]  REPUBLIC OF THE PHILIPPINES       │
+│           UNIFIED MULTI-PURPOSE ID          │
+│                                             │
+│           CRN: 01-234567890-1               │
+│                                             │
+│           DELA CRUZ, JUAN PABLO M.          │
+│           Date of Birth: 01/15/1990         │
+│           Address: 123 Rizal St, QC         │
+│                              [Hologram]     │
+└─────────────────────────────────────────────┘
+  85.6 × 54 mm  |  Teal/dark-green + gold eagle</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> crn</td><td>XX-XXXXXXXXX-X e.g. <code>01-234567890-1</code></td></tr>
+              <tr><td><span class="required-dot">●</span> name</td><td>SURNAME, GIVEN MIDDLE</td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_birth</td><td>MM/DD/YYYY e.g. <code>01/15/1990</code></td></tr>
+              <tr><td>raw_address</td><td>Full street address</td></tr>
+            </tbody>
+          </table>
+          <div class="ok-box">Zero flags → <span class="status-chip auto-approved">auto_approved</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSPORT -->
+  <div class="doc-card" style="margin-bottom:20px">
+    <div class="doc-card-header" style="background:var(--blue)">Philippine Passport (DFA)</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Data Page Layout</h3>
+          <div class="id-mockup">┌───────────────────────────────────────────────────────┐
+│ REPUBLIC OF THE PHILIPPINES        [Coat of Arms]     │
+│ PASSPORT / PASAPORTE                                  │
+│                                                       │
+│ [PHOTO]  Surname:      DELA CRUZ                      │
+│          Given Names:  JUAN PABLO                     │
+│          Nationality:  FILIPINO                       │
+│          Date of Birth: 15 JAN 1990   Sex: M          │
+│          Date of Expiry: 14 JAN 2034  No: PA1234567   │
+├───────────────────────────────────────────────────────┤
+│ P&lt;PHLDELA CRUZ&lt;&lt;JUAN PABLO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; │
+│ PA12345671PHL9001151M3401143&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;2       │
+└───────────────────────────────────────────────────────┘
+  125 × 88 mm data page  |  ePassport biometric chip</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> passport_number</td><td>P + 7 chars e.g. <code>PA1234567</code></td></tr>
+              <tr><td><span class="required-dot">●</span> surname</td><td>ALL CAPS</td></tr>
+              <tr><td><span class="required-dot">●</span> given_names</td><td>ALL CAPS</td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_birth</td><td>DD/MM/YYYY or YYMMDD (MRZ)</td></tr>
+              <tr><td><span class="required-dot">●</span> expiry_date</td><td>DD/MM/YYYY</td></tr>
+            </tbody>
+          </table>
+          <div class="flag-box">Expired passport raises:<code>expiry_check:expired=2023-01-14</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHILSYS -->
+  <div class="doc-card" style="margin-bottom:20px">
+    <div class="doc-card-header" style="background:var(--psa-gold); color:#1a1a1a">PhilSys National ID — ePhilID (PSA)</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Card Layout</h3>
+          <div class="id-mockup">┌──────────────────────────────────────────────────┐
+│ [PH Flag]  REPUBLIKA NG PILIPINAS  [PSA Seal]    │
+│            PAMBANSANG PAGKAKAKILANLAN            │
+│                                                  │
+│ [PHOTO]    PCN: 1234-5678-9012-3                 │
+│            REYES, ANA LIZA C.                    │
+│            Petsa ng Kapanganakan: 07/04/1995     │
+│            Kasarian: FEMALE   Dugo: O+           │
+│            Tirahan: 789 Commonwealth Ave, QC     │
+└──────────────────────────────────────────────────┘
+  85.6 × 54 mm  |  Gold/yellow + deep PSA blue</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> pcn</td><td>XXXX-XXXX-XXXX-X e.g. <code>1234-5678-9012-3</code></td></tr>
+              <tr><td><span class="required-dot">●</span> name</td><td>SURNAME, GIVEN MIDDLE</td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_birth</td><td>MM/DD/YYYY</td></tr>
+              <tr><td>sex</td><td>MALE / FEMALE</td></tr>
+              <tr><td>raw_address</td><td>Full address</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRIVER'S LICENSE -->
+  <div class="doc-card" style="margin-bottom:20px">
+    <div class="doc-card-header" style="background:var(--lto-blue)">LTO Driver's License</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Card Layout</h3>
+          <div class="id-mockup">┌──────────────────────────────────────────────┐
+│ REPUBLIC OF THE PHILIPPINES   [LTO Logo]     │
+│ LAND TRANSPORTATION OFFICE                   │
+│                                              │
+│ [PHOTO]  License No.: D01-23-456789          │
+│          Name: SANTOS, MARIA GRACE B.        │
+│          Address: 456 Mabini Ave, Pasig      │
+│          Date of Birth: 03/22/1988           │
+│          Expiry: 03/22/2026                  │
+│          Restrictions: 1, 2   [Hologram]     │
+└──────────────────────────────────────────────┘
+  85.6 × 54 mm  |  LTO blue + yellow strip</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> license_number</td><td>XX-XX-XXXXXX e.g. <code>D01-23-456789</code></td></tr>
+              <tr><td><span class="required-dot">●</span> name</td><td>SURNAME, GIVEN MIDDLE</td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_birth</td><td>MM/DD/YYYY</td></tr>
+              <tr><td><span class="required-dot">●</span> expiry_date</td><td>MM/DD/YYYY</td></tr>
+              <tr><td>restriction_codes</td><td>["1","2"] — codes 1–8</td></tr>
+            </tbody>
+          </table>
+          <table class="fields-table" style="margin-top:10px">
+            <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Motorcycle</td></tr>
+              <tr><td>2</td><td>Light vehicle (non-professional)</td></tr>
+              <tr><td>3</td><td>Light vehicle (professional)</td></tr>
+              <tr><td>4</td><td>Medium/Heavy truck</td></tr>
+              <tr><td>5</td><td>Bus / PUV</td></tr>
+              <tr><td>6</td><td>Articulated vehicle</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="medical">
+  <h2>Medical License (PRC) <span class="system-badge bayanicard">BayaniHub</span></h2>
+  <div class="doc-card">
+    <div class="doc-card-header" style="background:var(--prc-blue)">PRC Medical Professional License</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Card Layout</h3>
+          <div class="id-mockup">┌────────────────────────────────────────────────┐
+│ REPUBLIC OF THE PHILIPPINES     [PRC Seal]     │
+│ PROFESSIONAL REGULATION COMMISSION             │
+│                                                │
+│ PRC No.: 0123456                               │
+│                                                │
+│         REGISTERED NURSE          ← profession│
+│ [PHOTO]                                        │
+│         GARCIA, JOSE MIGUEL R.                 │
+│         Date of Birth: 09/18/1992              │
+│         Reg. Date:     07/01/2016              │
+│         Expiry:        06/30/2027  [Hologram]  │
+└────────────────────────────────────────────────┘
+  85.6 × 54 mm  |  PRC blue + gold seal</div>
+          <div class="flag-box">Non-medical profession raises:<code>medical_profession_not_licensed:detected_profession=CIVIL ENGINEER:expected=PRC_medical_profession</code></div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> prc_number</td><td>7 digits e.g. <code>0123456</code></td></tr>
+              <tr><td><span class="required-dot">●</span> profession</td><td>ALL CAPS medical profession</td></tr>
+              <tr><td><span class="required-dot">●</span> name</td><td>SURNAME, GIVEN MIDDLE</td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_birth</td><td>MM/DD/YYYY</td></tr>
+              <tr><td><span class="required-dot">●</span> expiry_date</td><td>MM/DD/YYYY</td></tr>
+              <tr><td>registration_date</td><td>MM/DD/YYYY</td></tr>
+            </tbody>
+          </table>
+          <h3 style="margin-top:14px">Accepted Medical Professions</h3>
+          <div style="font-size:.8rem; columns:2; column-gap:12px;">
+            <div>✓ PHYSICIAN / MEDICAL DOCTOR</div>
+            <div>✓ REGISTERED NURSE</div>
+            <div>✓ DENTIST / DENTAL SURGEON</div>
+            <div>✓ PHARMACIST</div>
+            <div>✓ PHYSICAL THERAPIST</div>
+            <div>✓ OCCUPATIONAL THERAPIST</div>
+            <div>✓ MEDICAL TECHNOLOGIST</div>
+            <div>✓ RADIOLOGIC TECHNOLOGIST</div>
+            <div>✓ MIDWIFE</div>
+            <div>✓ OPTOMETRIST</div>
+            <div>✓ NUTRITIONIST-DIETITIAN</div>
+            <div>✓ RESPIRATORY THERAPIST</div>
+            <div>✓ PSYCHOLOGIST</div>
+            <div>✓ VETERINARIAN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="org-cert">
+  <h2>Organisational Certificate <span class="system-badge hopecard">HopeCard</span></h2>
+  <div class="doc-card">
+    <div class="doc-card-header" style="background:#5d4037">DTI / CDA / DSWD Registration Certificate</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Document Layout (DTI example)</h3>
+          <div class="id-mockup">┌─────────────────────────────────────────────────────────┐
+│      REPUBLIC OF THE PHILIPPINES  [DTI Seal]            │
+│    DEPARTMENT OF TRADE AND INDUSTRY                     │
+│         BUSINESS NAME REGISTRATION                      │
+│                                                         │
+│ Business Name:                                          │
+│   PAG-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT         │
+│                                                         │
+│ Registration No.: BN-123456789-01                       │
+│ Date of Registration: March 15, 2019                    │
+│ Valid Until: March 15, 2024                             │
+│                                                         │
+│ Address: Unit 301, Kalayaan Bldg, España Blvd, Manila   │
+│ Owner: DELA CRUZ, JUAN PABLO M.                         │
+│                                                         │
+│ _________________________  [DTI QR Code]                │
+│ Authorised DTI Official                                 │
+└─────────────────────────────────────────────────────────┘
+  A4 portrait  |  White with DTI letterhead</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> organization_name</td><td>Full registered name</td></tr>
+              <tr><td><span class="required-dot">●</span> registration_number</td><td>DTI: <code>BN-XXXXXXXXX-XX</code></td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_registration</td><td>Date issued</td></tr>
+              <tr><td>certificate_type</td><td>DTI / CDA / DSWD / OTHER</td></tr>
+              <tr><td>validity_date</td><td>Expiry of certificate</td></tr>
+              <tr><td>authorized_representative</td><td>Owner / president name</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box">The <strong>expected_name</strong> field submitted via API should match the <em>organisation_name</em> on the certificate (80% fuzzy threshold).</div>
+          <div class="flag-box">Invalid DTI number format raises:<code>invalid_dti_registration_format:extracted=BN-123:expected=BN-XXXXXXXXX-XX</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="sec-reg">
+  <h2>SEC Registration <span class="system-badge hopecard">HopeCard</span></h2>
+  <div class="doc-card">
+    <div class="doc-card-header" style="background:var(--sec-maroon)">SEC Certificate of Registration</div>
+    <div class="doc-card-body">
+      <div class="grid">
+        <div>
+          <h3>Document Layout</h3>
+          <div class="id-mockup">┌──────────────────────────────────────────────────────────┐
+│      REPUBLIC OF THE PHILIPPINES                         │
+│  SECURITIES AND EXCHANGE COMMISSION  [SEC Seal]          │
+│                                                          │
+│         CERTIFICATE OF REGISTRATION                      │
+│                                                          │
+│ This is to certify that                                  │
+│                                                          │
+│   PAG-ASA FOUNDATION FOR COMMUNITY DEVELOPMENT, INC.    │
+│                                                          │
+│ a non-stock, non-profit foundation has been              │
+│ duly registered under SEC Reg. No. CS201900123456        │
+│ on February 20, 2019.                                    │
+│                                                          │
+│ Principal Office: Unit 301, Kalayaan Bldg, Manila        │
+│ Authorized Capital: PHP 1,000,000.00                     │
+│                                                          │
+│ _________________________  [SEC QR Code]                 │
+│ SEC Commissioner                                         │
+└──────────────────────────────────────────────────────────┘
+  A4 portrait  |  White + SEC maroon letterhead + gold seal</div>
+        </div>
+        <div>
+          <h3>Required Fields <span class="required-dot">●</span></h3>
+          <table class="fields-table">
+            <thead><tr><th>Field</th><th>Format / Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="required-dot">●</span> company_name</td><td>Full corporate name</td></tr>
+              <tr><td><span class="required-dot">●</span> sec_registration_number</td><td><code>CS201900123456</code></td></tr>
+              <tr><td><span class="required-dot">●</span> date_of_incorporation</td><td>Date of registration</td></tr>
+              <tr><td>type_of_corporation</td><td>CORPORATION / FOUNDATION / OPC</td></tr>
+              <tr><td>registered_address</td><td>Principal office</td></tr>
+              <tr><td>authorized_capital_stock</td><td>PHP amount</td></tr>
+            </tbody>
+          </table>
+          <h3 style="margin-top:14px">SEC Number Prefixes</h3>
+          <table class="fields-table">
+            <thead><tr><th>Prefix</th><th>Entity type</th></tr></thead>
+            <tbody>
+              <tr><td>CS</td><td>Domestic corporation / foundation</td></tr>
+              <tr><td>OPC</td><td>One Person Corporation</td></tr>
+              <tr><td>A</td><td>Partnership</td></tr>
+              <tr><td>FS / NA</td><td>Foreign stock / non-stock</td></tr>
+              <tr><td>FC</td><td>Branch of foreign corporation</td></tr>
+            </tbody>
+          </table>
+          <div class="flag-box">Invalid SEC number format raises:<code>invalid_sec_number_format:extracted=12345:expected=PREFIX+9-12digits</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="flags">
+  <h2>Flag Reference — Where Errors Are Detected</h2>
+  <p style="margin-bottom:16px; font-size:.9rem; color:#555;">All flags result in <span class="status-chip needs-review">needs_review</span>. The admin panel displays these structured strings so reviewers know exactly what was wrong.</p>
+
+  <table class="fields-table">
+    <thead>
+      <tr>
+        <th>Flag (prefix)</th>
+        <th>Detection Layer</th>
+        <th>Example value</th>
+        <th>Admin action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>blurry_image</code></td>
+        <td>Image quality (OpenCV Laplacian)</td>
+        <td><code>blurry_image:laplacian=42.3:threshold=100</code></td>
+        <td>Ask user to resubmit clearer photo</td>
+      </tr>
+      <tr>
+        <td><code>poor_lighting</code></td>
+        <td>Image quality (brightness)</td>
+        <td><code>poor_lighting:brightness=28.1:reason=too_dark</code></td>
+        <td>Ask user to photograph in better light</td>
+      </tr>
+      <tr>
+        <td><code>missing_required_field</code></td>
+        <td>OCR extraction completeness</td>
+        <td><code>missing_required_field:prc_number:doc_type=medical_license</code></td>
+        <td>Check if field is obscured; resubmit or manually enter</td>
+      </tr>
+      <tr>
+        <td><code>low_ocr_confidence</code></td>
+        <td>Tesseract word confidence</td>
+        <td><code>low_ocr_confidence:avg=48%:threshold=60%</code></td>
+        <td>Image quality issue; resubmit higher-res scan</td>
+      </tr>
+      <tr>
+        <td><code>name_mismatch</code></td>
+        <td>Fuzzy name comparison</td>
+        <td><code>name_mismatch:similarity=62%:extracted=DELA CRUZ J:expected=JUAN DELA CRUZ</code></td>
+        <td>Verify identity manually; check for aliases</td>
+      </tr>
+      <tr>
+        <td><code>org_name_mismatch</code></td>
+        <td>Fuzzy org-name comparison</td>
+        <td><code>org_name_mismatch:similarity=55%:extracted=PAG-ASA FOUNDATION:expected=PINAS FOUNDATION</code></td>
+        <td>Confirm organisation identity; check for name changes</td>
+      </tr>
+      <tr>
+        <td><code>dob_mismatch</code></td>
+        <td>Date-of-birth comparison</td>
+        <td><code>dob_mismatch:extracted=01/15/1990:expected=01/15/1989</code></td>
+        <td>Verify DOB; possible OCR digit swap</td>
+      </tr>
+      <tr>
+        <td><code>expiry_check</code></td>
+        <td>Expiry date vs today</td>
+        <td><code>expiry_check:expired=2023-06-30</code></td>
+        <td>Inform user; request updated document</td>
+      </tr>
+      <tr>
+        <td><code>document_type_mismatch</code></td>
+        <td>ORB template classifier vs submitted type</td>
+        <td><code>document_type_mismatch:expected=medical_license:detected=drivers_license</code></td>
+        <td>Confirm correct document was uploaded</td>
+      </tr>
+      <tr>
+        <td><code>medical_profession_not_licensed</code></td>
+        <td>Profession whitelist check</td>
+        <td><code>medical_profession_not_licensed:detected_profession=CIVIL ENGINEER</code></td>
+        <td>BayaniHub only: verify medical volunteer credentials</td>
+      </tr>
+      <tr>
+        <td><code>invalid_sec_number_format</code></td>
+        <td>SEC number regex validation</td>
+        <td><code>invalid_sec_number_format:extracted=12345:expected=PREFIX+9-12digits</code></td>
+        <td>Request clearer scan or correct SEC document</td>
+      </tr>
+      <tr>
+        <td><code>invalid_dti_registration_format</code></td>
+        <td>DTI BN number regex validation</td>
+        <td><code>invalid_dti_registration_format:extracted=BN-123:expected=BN-XXXXXXXXX-XX</code></td>
+        <td>Request clearer scan or correct DTI certificate</td>
+      </tr>
+      <tr>
+        <td><code>partial_document</code></td>
+        <td>Region coverage analysis (OpenCV)</td>
+        <td><code>partial_document:coverage=41%:threshold=60%</code></td>
+        <td>Ask user to resubmit showing full document</td>
+      </tr>
+      <tr>
+        <td><code>unrecognized_format</code></td>
+        <td>ORB classifier low confidence</td>
+        <td><code>unrecognized_format:classifier_confidence=low</code></td>
+        <td>Manual review; may be unsupported or altered document</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:24px; margin-bottom:10px">Status Flow</h3>
+  <div class="id-mockup" style="font-size:.78rem">POST /api/v1/verify
+  └─► status = "processing"
+       │
+       ▼  Celery worker runs OCR + template matching + flagging
+       │
+       ├─► flags == []  ──►  status = "auto_approved"  ──►  webhook fired immediately
+       │
+       └─► flags != []  ──►  status = "needs_review"
+                              │
+                              ▼  Admin fetches GET /api/v1/review/queue
+                              │  Reviews flags + presigned image URL
+                              │
+                              ├─► POST /api/v1/review/{job_id}  action="approve"
+                              │    └─► status = "approved"  ──►  webhook fired
+                              │
+                              └─► POST /api/v1/review/{job_id}  action="reject"
+                                   └─► status = "rejected"  ──►  webhook fired
+
+NOTE: The API NEVER auto-rejects. Only a human reviewer can reject a document.</div>
+</section>
+
+</main>
+<footer>Philippine ID Verification API · Reference Templates · v1.0.0 · For internal admin use only</footer>
+</body>
+</html>

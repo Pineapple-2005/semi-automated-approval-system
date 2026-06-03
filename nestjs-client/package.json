@@ -1,0 +1,37 @@
+{
+  "name": "@your-org/nestjs-verification-client",
+  "version": "1.0.0",
+  "description": "Drop-in NestJS module for Philippine ID Document Verification API. Copy the src/verification/ folder into your NestJS app and set VERIFY_API_URL, VERIFY_API_KEY, SYSTEM_ID in your .env.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint '{src}/**/*.ts'"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/axios": "^3.0.0",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/event-emitter": "^2.0.0",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.0",
+    "form-data": "^4.0.0",
+    "rxjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.0.0",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "nestjs",
+    "philippine-id",
+    "document-verification",
+    "ocr",
+    "kyc"
+  ],
+  "license": "MIT"
+}

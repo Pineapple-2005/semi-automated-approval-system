@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE Philippine ePassport (data page).",
+    "document_type": "passport",
+    "system": "HopeCard (system1) — government_id umbrella"
+  },
+  "extracted_data": {
+    "passport_number": "PA1234567",
+    "surname":         "DELA CRUZ",
+    "given_names":     "JUAN PABLO",
+    "date_of_birth":   "15/01/1990",
+    "expiry_date":     "14/01/2034",
+    "nationality":     "FILIPINO",
+    "mrz_line1":       "P<PHLDELA CRUZ<<JUAN PABLO<<<<<<<<<<<<<<<<<",
+    "mrz_line2":       "PA12345671PHL9001151M3401143<<<<<<<<<<<<<<2"
+  },
+  "confidence_scores": {
+    "passport_number": 0.95,
+    "surname":         0.96,
+    "given_names":     0.94,
+    "date_of_birth":   0.93,
+    "expiry_date":     0.93
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "data_page_layout": [
+      "┌────────────────────────────────────────────────────────────┐",
+      "│ REPUBLIC OF THE PHILIPPINES        [PH Coat of Arms]       │",
+      "│ PASSPORT / PASAPORTE                                        │",
+      "│ [PHOTO]  Surname:      DELA CRUZ                           │",
+      "│          Given Names:  JUAN PABLO                          │",
+      "│          Nationality:  FILIPINO                            │",
+      "│          Date of Birth: 15 JAN 1990   Sex: M               │",
+      "│          Place of Birth: QUEZON CITY                        │",
+      "│          Date of Issue:  15 JAN 2024                        │",
+      "│          Date of Expiry: 14 JAN 2034   No: PA1234567        │",
+      "├────────────────────────────────────────────────────────────┤",
+      "│ P<PHLDELA CRUZ<<JUAN PABLO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    │",
+      "│ PA12345671PHL9001151M3401143<<<<<<<<<<<<<<2                │",
+      "└────────────────────────────────────────────────────────────┘"
+    ],
+    "mrz_explanation": {
+      "line1": "P=passport, <PHL=Philippines, DELA CRUZ<<JUAN PABLO=name",
+      "line2": "PA1234567=doc_no, 1=check, PHL=nationality, 900115=DOB(YYMMDD), 1=check, M=male, 340114=expiry, 3=check"
+    }
+  }
+}

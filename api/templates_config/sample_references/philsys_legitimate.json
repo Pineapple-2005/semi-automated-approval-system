@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "description": "Sample extracted data from a LEGITIMATE PhilSys National ID (ePhilID).",
+    "document_type": "philsys",
+    "system": "HopeCard (system1) or Damayan (system3) — government_id umbrella"
+  },
+  "extracted_data": {
+    "pcn":         "1234-5678-9012-3",
+    "name":        "REYES, ANA LIZA C.",
+    "sex":         "FEMALE",
+    "date_of_birth":"07/04/1995",
+    "raw_address": "789 Commonwealth Ave, Quezon City, 1126"
+  },
+  "confidence_scores": {
+    "pcn":          0.94,
+    "name":         0.91,
+    "sex":          0.98,
+    "date_of_birth":0.92,
+    "raw_address":  0.78
+  },
+  "expected_flags": [],
+  "status": "auto_approved",
+  "visual_reference": {
+    "front_layout": [
+      "┌────────────────────────────────────────────────────────┐",
+      "│ [PH Flag]  REPUBLIKA NG PILIPINAS       [PSA Seal]     │",
+      "│            PAMBANSANG PAGKAKAKILANLAN                  │",
+      "│ [PHOTO]    PCN: 1234-5678-9012-3                       │",
+      "│            REYES, ANA LIZA C.                          │",
+      "│            Petsa ng Kapanganakan: 07/04/1995           │",
+      "│            Kasarian: FEMALE   Grupo ng Dugo: O+        │",
+      "│            Tirahan: 789 Commonwealth Ave, QC 1126      │",
+      "└────────────────────────────────────────────────────────┘"
+    ],
+    "card_colour": "Gold/yellow with deep blue PSA branding and Philippine flag imagery"
+  }
+}

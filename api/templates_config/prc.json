@@ -1,0 +1,42 @@
+{
+  "document_type": "prc",
+  "display_name": "PRC ID (Professional Regulation Commission ID)",
+  "issuer": "Professional Regulation Commission (PRC)",
+  "standard_dimensions_mm": { "width": 85.6, "height": 54.0 },
+  "aspect_ratio": 1.5852,
+  "required_fields": ["prc_number", "name", "date_of_birth", "expiry_date"],
+  "optional_fields": ["profession", "registration_date", "license_number", "blood_type"],
+  "regex_patterns": {
+    "prc_number": "(?:PRC No\\.?|Registration No\\.?|RegNo)[:\\s]*(\\d{7})",
+    "license_number": "(?:License No\\.?|Lic\\.? No\\.?)[:\\s]*(\\d{5,8})",
+    "profession": "(?:^|\\n)([A-Z][A-Z\\s]+(?:ENGINEER|ARCHITECT|NURSE|DOCTOR|PHYSICIAN|PHARMACIST|LAWYER|ACCOUNTANT|DENTIST|MIDWIFE|PSYCHOLOGIST|TEACHER|CHEMIST|VETERINARIAN|AGRICULTURIST|FORESTER|GEOLOGIST|GEODETIC|SANITARY)(?:\\s+[A-Z]+)*)",
+    "name": "(?:Name|PANGALAN)[:\\s]+([A-Z][A-Za-z,\\.\\s\\-]+)",
+    "date_of_birth": "(?:Date of Birth|DOB|Birthdate)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\d{2}\\s+[A-Z]{3}\\s+\\d{4})",
+    "registration_date": "(?:Date of Registration|Reg\\.? Date)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "expiry_date": "(?:Expiry|Expiration|Valid Until|EXP)[:\\s]+(\\d{2}[/\\-]\\d{2}[/\\-]\\d{4}|\\d{2}\\s+[A-Z]{3}\\s+\\d{4})",
+    "blood_type": "(?:Blood Type|BT)[:\\s]+([ABO]{1,2}[+-]?)"
+  },
+  "ocr_regions": [
+    { "name": "photo",            "x_ratio": 0.04, "y_ratio": 0.10, "w_ratio": 0.24, "h_ratio": 0.72 },
+    { "name": "prc_number_area",  "x_ratio": 0.30, "y_ratio": 0.05, "w_ratio": 0.68, "h_ratio": 0.16 },
+    { "name": "profession_area",  "x_ratio": 0.30, "y_ratio": 0.22, "w_ratio": 0.68, "h_ratio": 0.14 },
+    { "name": "name_area",        "x_ratio": 0.30, "y_ratio": 0.38, "w_ratio": 0.68, "h_ratio": 0.16 },
+    { "name": "dob_area",         "x_ratio": 0.30, "y_ratio": 0.56, "w_ratio": 0.40, "h_ratio": 0.13 },
+    { "name": "expiry_area",      "x_ratio": 0.72, "y_ratio": 0.56, "w_ratio": 0.26, "h_ratio": 0.13 },
+    { "name": "reg_date_area",    "x_ratio": 0.30, "y_ratio": 0.71, "w_ratio": 0.68, "h_ratio": 0.15 }
+  ],
+  "color_hints": {
+    "dominant_colors": ["prc_blue", "gold", "white", "dark_blue"],
+    "background": "blue_with_gold_accents",
+    "text_color": "white_or_dark_blue"
+  },
+  "security_features": [
+    "Holographic seal",
+    "Laser-engraved professional details",
+    "UV-reactive ink",
+    "2D barcode with registration data",
+    "Microprinting on border",
+    "PRC official seal embossed"
+  ],
+  "notes": "PRC number is 7 digits. Profession is printed in ALL CAPS (e.g., REGISTERED NURSE, CIVIL ENGINEER). Validity: typically 3 years. Card shows Philippine coat of arms and PRC logo. Registration date = date license was first issued. Expiry = renewal deadline. Different colored card variants for different professions in some batches. The PRC maintains the Philippine Registry of Licensed Professionals."
+}

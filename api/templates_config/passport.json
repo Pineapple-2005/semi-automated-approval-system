@@ -1,0 +1,44 @@
+{
+  "document_type": "passport",
+  "display_name": "Philippine Passport",
+  "issuer": "Department of Foreign Affairs (DFA)",
+  "standard_dimensions_mm": { "width": 125.0, "height": 88.0 },
+  "aspect_ratio": 1.4205,
+  "required_fields": ["passport_number", "surname", "given_names", "date_of_birth", "expiry_date"],
+  "optional_fields": ["middle_name", "nationality", "sex", "place_of_birth", "mrz_line1", "mrz_line2"],
+  "regex_patterns": {
+    "passport_number": "\\b(P[A-Z0-9]{7})\\b",
+    "surname": "(?:Surname|Apellido|SURNAME)[:\\s]+([A-Z][A-Z\\s\\-]+)",
+    "given_names": "(?:Given Names?|Pangalan|GIVEN NAMES?)[:\\s]+([A-Z][A-Za-z\\s\\-]+)",
+    "date_of_birth": "(?:Date of Birth|DOB|BIRTH)[:\\s]*(\\d{2}\\s+[A-Z]{3}\\s+\\d{4}|\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "expiry_date": "(?:Date of Expiry|Expiry|EXPIRY)[:\\s]*(\\d{2}\\s+[A-Z]{3}\\s+\\d{4}|\\d{2}[/\\-]\\d{2}[/\\-]\\d{4})",
+    "nationality": "(?:Nationality|NATIONALITY)[:\\s]+(FILIPINO|Filipino)",
+    "sex": "\\b(M|F)\\b(?=.*MRZ|.*<)",
+    "mrz_line1": "P<PHL([A-Z<]{39})",
+    "mrz_line2": "([A-Z0-9<]{44})"
+  },
+  "ocr_regions": [
+    { "name": "photo",          "x_ratio": 0.05, "y_ratio": 0.12, "w_ratio": 0.30, "h_ratio": 0.55 },
+    { "name": "surname_area",   "x_ratio": 0.38, "y_ratio": 0.12, "w_ratio": 0.60, "h_ratio": 0.12 },
+    { "name": "givenname_area", "x_ratio": 0.38, "y_ratio": 0.25, "w_ratio": 0.60, "h_ratio": 0.12 },
+    { "name": "dob_area",       "x_ratio": 0.05, "y_ratio": 0.52, "w_ratio": 0.42, "h_ratio": 0.10 },
+    { "name": "expiry_area",    "x_ratio": 0.55, "y_ratio": 0.52, "w_ratio": 0.42, "h_ratio": 0.10 },
+    { "name": "mrz_area",       "x_ratio": 0.02, "y_ratio": 0.78, "w_ratio": 0.96, "h_ratio": 0.20 }
+  ],
+  "color_hints": {
+    "dominant_colors": ["dark_blue", "gold", "white", "light_blue"],
+    "background": "security_paper_watermark",
+    "text_color": "black_on_white"
+  },
+  "security_features": [
+    "Machine Readable Zone (MRZ) - ICAO 9303 compliant",
+    "Biometric chip (ePassport)",
+    "Laser-perforated passport number",
+    "UV-fluorescent security fibres",
+    "Intaglio printing",
+    "Guilloche pattern",
+    "Holographic laminate on data page",
+    "Digitally printed photo"
+  ],
+  "notes": "Passport number starts with 'P' followed by 7 alphanumeric characters. Dates on data page in DD MMM YYYY format (e.g. 15 JAN 1990). MRZ is 2 lines of 44 characters each. Validity: 10 years for adults, 5 years for minors. Current e-passport series introduced 2016."
+}

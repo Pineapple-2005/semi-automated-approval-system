@@ -1,0 +1,102 @@
+version: "3.9"
+
+# =============================================================================
+# Philippine ID Document Verification API - Docker Compose
+# =============================================================================
+# NOTE: No database service is defined here. The application connects to
+# Supabase PostgreSQL directly via the DATABASE_URL environment variable.
+
+networks:
+  verification-network:
+    driver: bridge
+
+volumes:
+  minio_data:
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # Redis — Celery message broker and result backend
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - verification-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ---------------------------------------------------------------------------
+  # MinIO — S3-compatible object storage for ID document images
+  # ---------------------------------------------------------------------------
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address :9001
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # MinIO Console UI
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    volumes:
+      - minio_data:/data
+    networks:
+      - verification-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # API — FastAPI application served by Uvicorn
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - verification-network
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # Worker — Celery worker that processes verification jobs
+  # ---------------------------------------------------------------------------
+  worker:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: celery -A app.tasks.celery_app worker --loglevel=info --concurrency=4
+    env_file:
+      - .env
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - verification-network
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
