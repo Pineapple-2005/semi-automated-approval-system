@@ -42,9 +42,10 @@ _DOCUMENT_PROFILES = {
         },
     },
     "passport": {
-        # Booklet open -> landscape ~1.42; closed cover -> near 1.0 (portrait)
+        # Booklet data page (landscape) ~1.42; closed cover (portrait) ~0.71.
+        # Tolerance tightened so CR80 cards (1.586) are excluded from this range.
         "aspect_ratio_target": 1.42,
-        "aspect_ratio_tolerance": 0.20,
+        "aspect_ratio_tolerance": 0.10,
         "dominant_color": "neutral",
         "keypoint_count_min": 100,
         "keypoint_count_max": 400,
@@ -52,9 +53,10 @@ _DOCUMENT_PROFILES = {
         "weights": {
             "aspect_ratio": 0.25,
             "color": 0.10,
-            "keypoint": 0.20,
-            "text_density": 0.25,
-            "edge_density": 0.20,
+            "keypoint": 0.15,
+            "text_density": 0.15,
+            "edge_density": 0.15,
+            "mrz": 0.20,        # MRZ zone is a passport-only feature
         },
     },
     "drivers_license": {
@@ -179,6 +181,7 @@ def preprocess_for_matching(image_bytes: bytes) -> np.ndarray:
 def analyze_document_characteristics(
     image_np: np.ndarray,
     color_image_np: np.ndarray,
+    original_aspect_ratio: Optional[float] = None,
 ) -> dict:
     """Extract heuristic features from a preprocessed document image.
 
@@ -186,6 +189,8 @@ def analyze_document_characteristics(
         image_np: Grayscale image as returned by preprocess_for_matching (H x W).
         color_image_np: Original color image resized/cropped to the same spatial
                         dimensions as image_np (H x W x 3, BGR).
+        original_aspect_ratio: Width/height computed from the raw image before
+                                any resizing.  Preferred over the post-resize ratio.
 
     Returns:
         dict with keys:
@@ -196,7 +201,10 @@ def analyze_document_characteristics(
             color_profile (str)         - dominant color label
     """
     h, w = image_np.shape[:2]
-    aspect_ratio: float = w / h if h > 0 else 0.0
+    # Use the original (pre-resize) ratio when available; the resized image is
+    # always 800x500 (ratio 1.6) which masks real document shape differences.
+    resized_ratio: float = w / h if h > 0 else 0.0
+    aspect_ratio: float = original_aspect_ratio if original_aspect_ratio is not None else resized_ratio
 
     # --- ORB keypoints ---
     orb = cv2.ORB_create(nfeatures=500)
@@ -349,6 +357,38 @@ def _score_text_density(density: float, density_min: float) -> float:
 
 
 # ---------------------------------------------------------------------------
+# MRZ presence detector (passport-specific)
+# ---------------------------------------------------------------------------
+
+def _score_mrz_presence(gray_image: np.ndarray) -> float:
+    """Return a 0-1 score indicating how likely the bottom strip contains an MRZ.
+
+    A Philippine passport's MRZ (ICAO 9303) occupies the bottom ~22% of the
+    data page as two rows of 44 characters from [A-Z0-9<].  The fill ratio per
+    row is typically 65-85%, much higher than ordinary text lines.
+    Other Philippine IDs (PhilSys, UMID, DL, PRC) have no MRZ and will score
+    near 0.0 on this metric.
+    """
+    h, w = gray_image.shape[:2]
+    bottom_strip = gray_image[int(h * 0.78):, :]
+    if bottom_strip.size == 0:
+        return 0.0
+
+    # BINARY_INV so dark (text) pixels become white for easy counting
+    _, binary_inv = cv2.threshold(
+        bottom_strip, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    )
+    row_fill = np.sum(binary_inv == 255, axis=1).astype(float) / max(w, 1)
+    # MRZ character rows have very dense fill (>55% of width)
+    dense_rows = int(np.sum(row_fill > 0.55))
+    if dense_rows >= 2:
+        return 1.0
+    if dense_rows == 1:
+        return 0.4
+    return 0.0
+
+
+# ---------------------------------------------------------------------------
 # Classification
 # ---------------------------------------------------------------------------
 
@@ -362,16 +402,27 @@ def classify_document_type(image_bytes: bytes) -> tuple[str, float]:
         Tuple of (document_type_str, confidence_float).
         If the best score is below _MIN_CONFIDENCE_THRESHOLD, returns ("unknown", score).
     """
-    gray = preprocess_for_matching(image_bytes)
+    # Decode once to capture the original dimensions before any resizing.
+    # preprocess_for_matching forces 800x500 so aspect_ratio would always be
+    # 1.6 if computed from the processed image — defeating the feature entirely.
     nparr = np.frombuffer(image_bytes, dtype=np.uint8)
     color_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+    original_aspect_ratio: Optional[float] = None
     if color_img is None:
         logger.warning("classify_document_type: could not decode color image; proceeding with zeros.")
         color_img = np.zeros((500, 800, 3), dtype=np.uint8)
     else:
+        orig_h, orig_w = color_img.shape[:2]
+        if orig_h > 0:
+            original_aspect_ratio = orig_w / orig_h
         color_img = cv2.resize(color_img, (800, 500), interpolation=cv2.INTER_AREA)
 
-    characteristics = analyze_document_characteristics(gray, color_img)
+    gray = preprocess_for_matching(image_bytes)
+    characteristics = analyze_document_characteristics(gray, color_img, original_aspect_ratio)
+
+    # Pre-compute MRZ score once (only meaningful for passport)
+    mrz_score = _score_mrz_presence(gray)
 
     scores: dict[str, float] = {}
 
@@ -400,22 +451,27 @@ def classify_document_type(image_bytes: bytes) -> tuple[str, float]:
         ed_baseline = 0.05
         ed_score = min(1.0, characteristics["edge_density"] / ed_baseline) if ed_baseline > 0 else 0.0
 
+        # MRZ weight is only present in the passport profile; defaults to 0
+        mrz_weight = weights.get("mrz", 0.0)
+
         weighted = (
             weights["aspect_ratio"] * ar_score
             + weights["color"] * color_score
             + weights["keypoint"] * kp_score
             + weights["text_density"] * td_score
             + weights["edge_density"] * ed_score
+            + mrz_weight * mrz_score
         )
         scores[doc_type] = round(weighted, 4)
         logger.debug(
-            "Type=%s ar=%.3f color=%.3f kp=%.3f td=%.3f ed=%.3f -> score=%.4f",
+            "Type=%s ar=%.3f color=%.3f kp=%.3f td=%.3f ed=%.3f mrz=%.3f -> score=%.4f",
             doc_type,
             ar_score,
             color_score,
             kp_score,
             td_score,
             ed_score,
+            mrz_score if mrz_weight > 0 else 0.0,
             weighted,
         )
 
@@ -438,7 +494,7 @@ def classify_document_type(image_bytes: bytes) -> tuple[str, float]:
 # Region verification
 # ---------------------------------------------------------------------------
 
-def verify_document_regions(image_np: np.ndarray, document_type: str) -> dict:
+def verify_document_regions(image_np: np.ndarray) -> dict:
     """Verify expected spatial regions (photo area, text area, document boundary).
 
     Args:
@@ -465,7 +521,7 @@ def verify_document_regions(image_np: np.ndarray, document_type: str) -> dict:
 
     largest_rect_area = 0.0
     for contour in contours:
-        x, y, cw, ch = cv2.boundingRect(contour)
+        _, _, cw, ch = cv2.boundingRect(contour)
         rect_area = cw * ch
         if rect_area > largest_rect_area:
             largest_rect_area = float(rect_area)
@@ -523,14 +579,7 @@ def run_template_matching(image_bytes: bytes, expected_type: str) -> dict:
     detected_type, confidence = classify_document_type(image_bytes)
 
     gray = preprocess_for_matching(image_bytes)
-
-    nparr = np.frombuffer(image_bytes, dtype=np.uint8)
-    color_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    if color_img is None:
-        logger.warning("run_template_matching: could not decode color image for region analysis.")
-        color_img = np.zeros((500, 800, 3), dtype=np.uint8)
-
-    region_analysis = verify_document_regions(gray, expected_type)
+    region_analysis = verify_document_regions(gray)
 
     # "unknown" means we could not confidently classify -- do not flag as mismatch
     matches_expected: bool = (detected_type == expected_type) or (detected_type == "unknown")
